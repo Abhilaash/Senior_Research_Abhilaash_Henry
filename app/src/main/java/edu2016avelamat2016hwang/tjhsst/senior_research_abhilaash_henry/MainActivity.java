@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.atap.tangoservice.Tango;
+
 public class MainActivity extends ActionBarActivity {
     private Button bStart;
     private Button bHelp;
@@ -15,6 +17,12 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        startActivityForResult(
+                Tango.getRequestPermissionIntent(Tango.PERMISSIONTYPE_MOTION_TRACKING),
+                Tango.TANGO_INTENT_ACTIVITYCODE);
+        startActivityForResult(
+                Tango.getRequestPermissionIntent(Tango.PERMISSIONTYPE_ADF_LOAD_SAVE),
+                Tango.TANGO_INTENT_ACTIVITYCODE);
         bStart = (Button) findViewById(R.id.buttonStart);
         bHelp = (Button) findViewById(R.id.buttonHelp);
         bStart.setOnClickListener(
