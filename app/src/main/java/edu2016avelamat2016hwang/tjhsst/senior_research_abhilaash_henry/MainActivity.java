@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity {
         startActivityForResult(
                 Tango.getRequestPermissionIntent(Tango.PERMISSIONTYPE_ADF_LOAD_SAVE),
                 Tango.TANGO_INTENT_ACTIVITYCODE);
+
         bStart = (Button) findViewById(R.id.buttonStart);
         bHelp = (Button) findViewById(R.id.buttonHelp);
         bStart.setOnClickListener(
