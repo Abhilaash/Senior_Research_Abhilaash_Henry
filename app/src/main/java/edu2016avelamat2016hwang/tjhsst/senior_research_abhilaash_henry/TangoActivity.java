@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.atap.tangoservice.Tango;
+import com.google.atap.tangoservice.TangoCameraIntrinsics;
+import com.google.atap.tangoservice.TangoCameraPreview;
 import com.google.atap.tangoservice.TangoConfig;
 import com.google.atap.tangoservice.TangoErrorException;
 
@@ -15,6 +17,8 @@ import com.google.atap.tangoservice.TangoErrorException;
     public class TangoActivity extends ActionBarActivity {
         private Tango mTango;
         private TangoConfig mConfig;
+        private TangoCameraPreview tangoCameraPreview;
+        private TangoCameraIntrinsics tangoCameraIntrinsics;
 
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
@@ -27,5 +31,16 @@ import com.google.atap.tangoservice.TangoErrorException;
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_DEPTH, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_LEARNINGMODE, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_MOTIONTRACKING, true);
+            tangoCameraPreview = new TangoCameraPreview(this);
+            tangoCameraIntrinsics = new TangoCameraIntrinsics();
+            conCamera(tangoCameraIntrinsics.TANGO_CAMERA_DEPTH);
+        }
+
+        private void conCamera(int tangoCameraIntrinsicsNumber){
+            tangoCameraPreview.connectToTangoCamera(mTango, tangoCameraIntrinsicsNumber);
+        }
+
+        private void disCamera(){
+            tangoCameraPreview.disconnectFromTangoCamera();
         }
     }
