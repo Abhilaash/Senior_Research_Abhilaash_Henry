@@ -15,9 +15,16 @@
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".HelpActivity"
+            android:label="Help Activity">
+        </activity>
+        <activity
+            android:name=".TangoActivity"
+            android:label="Camera">
         </activity>
     </application>
 
