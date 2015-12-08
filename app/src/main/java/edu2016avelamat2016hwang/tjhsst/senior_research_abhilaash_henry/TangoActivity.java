@@ -15,13 +15,17 @@ import com.google.atap.tangoservice.TangoErrorException;
     public class TangoActivity extends ActionBarActivity {
         private Tango mTango;
         private TangoConfig mConfig;
+
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_tango);
             mTango = new Tango(this);
             mConfig = new TangoConfig();
             mConfig = mTango.getConfig(TangoConfig.CONFIG_TYPE_CURRENT);
-            mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_MOTIONTRACKING, true);
+            mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORCAMERA, true);
+            mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORMODEAUTO, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_DEPTH, true);
+            mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_LEARNINGMODE, true);
+            mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_MOTIONTRACKING, true);
         }
     }
