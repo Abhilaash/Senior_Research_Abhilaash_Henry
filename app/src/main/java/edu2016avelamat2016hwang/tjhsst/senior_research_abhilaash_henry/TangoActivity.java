@@ -2,14 +2,18 @@ package edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.google.atap.tangoservice.Tango;
 import com.google.atap.tangoservice.TangoCameraIntrinsics;
 import com.google.atap.tangoservice.TangoCameraPreview;
 import com.google.atap.tangoservice.TangoConfig;
-import com.google.atap.tangoservice.TangoErrorException;
+import com.google.atap.tangoservice.TangoCoordinateFramePair;
+import com.google.atap.tangoservice.TangoEvent;
+import com.google.atap.tangoservice.TangoPoseData;
+import com.google.atap.tangoservice.TangoXyzIjData;
+
+import java.util.ArrayList;
+
 
 /**
  * Created by henrywang on 11/4/15.
@@ -20,9 +24,11 @@ import com.google.atap.tangoservice.TangoErrorException;
         private TangoCameraPreview tangoCameraPreview;
         private TangoCameraIntrinsics tangoCameraIntrinsics;
 
+
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_tango);
+
             mTango = new Tango(this);
             mConfig = new TangoConfig();
             mConfig = mTango.getConfig(TangoConfig.CONFIG_TYPE_CURRENT);
@@ -32,15 +38,51 @@ import com.google.atap.tangoservice.TangoErrorException;
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_LEARNINGMODE, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_MOTIONTRACKING, true);
             tangoCameraPreview = new TangoCameraPreview(this);
-            tangoCameraIntrinsics = new TangoCameraIntrinsics();
-            conCamera(tangoCameraIntrinsics.TANGO_CAMERA_DEPTH);
+            startCamera();
+            setContentView(tangoCameraPreview);
+//            tangoCameraPreview = new TangoCameraPreview(this);
+//            tangoCameraIntrinsics = new TangoCameraIntrinsics();
+//            conCamera(tangoCameraIntrinsics.TANGO_CAMERA_DEPTH);
         }
 
-        private void conCamera(int tangoCameraIntrinsicsNumber){
-            tangoCameraPreview.connectToTangoCamera(mTango, tangoCameraIntrinsicsNumber);
+        private void startCamera(){
+            tangoCameraPreview.connectToTangoCamera(mTango,
+                    TangoCameraIntrinsics.TANGO_CAMERA_COLOR);
+            // Use default configuration for Tango Service.
+            TangoConfig config = mTango.getConfig(TangoConfig.CONFIG_TYPE_DEFAULT);
+            mTango.connect(config);
+            ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList<TangoCoordinateFramePair>();
+            mTango.connectListener(framePairs, new Tango.OnTangoUpdateListener() {
+                @Override
+                public void onPoseAvailable(TangoPoseData pose) {
+                    // We are not using OnPoseAvailable for this app
+                }
+
+                @Override
+                public void onFrameAvailable(int cameraId) {
+
+                    // Check if the frame available is for the camera we want and
+                    // update its frame on the camera preview.
+                    if (cameraId == TangoCameraIntrinsics.TANGO_CAMERA_COLOR) {
+                        tangoCameraPreview.onFrameAvailable();
+                    }
+                }
+
+                @Override
+                public void onXyzIjAvailable(TangoXyzIjData xyzIj) {
+                    // We are not using OnPoseAvailable for this app
+                }
+
+                @Override
+                public void onTangoEvent(TangoEvent event) {
+                    // We are not using OnPoseAvailable for this app
+                }
+            });
         }
 
-        private void disCamera(){
-            tangoCameraPreview.disconnectFromTangoCamera();
+        @Override
+        protected void onPause() {
+            super.onPause();
+            mTango.disconnect();
         }
     }
