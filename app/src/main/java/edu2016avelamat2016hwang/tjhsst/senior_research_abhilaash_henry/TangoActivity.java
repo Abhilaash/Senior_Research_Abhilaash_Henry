@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
             mTango = new Tango(this);
             mConfig = new TangoConfig();
-            mConfig = mTango.getConfig(TangoConfig.CONFIG_TYPE_CURRENT);
+            mConfig = mTango.getConfig(TangoConfig.CONFIG_TYPE_DEFAULT);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORCAMERA, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORMODEAUTO, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_DEPTH, true);
@@ -49,8 +49,7 @@ import java.util.ArrayList;
             tangoCameraPreview.connectToTangoCamera(mTango,
                     TangoCameraIntrinsics.TANGO_CAMERA_COLOR);
             // Use default configuration for Tango Service.
-            TangoConfig config = mTango.getConfig(TangoConfig.CONFIG_TYPE_DEFAULT);
-            mTango.connect(config);
+            mTango.connect(mConfig);
             ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList<TangoCoordinateFramePair>();
             mTango.connectListener(framePairs, new Tango.OnTangoUpdateListener() {
                 @Override
@@ -70,7 +69,7 @@ import java.util.ArrayList;
 
                 @Override
                 public void onXyzIjAvailable(TangoXyzIjData xyzIj) {
-                    // We are not using OnPoseAvailable for this app
+
                 }
 
                 @Override
