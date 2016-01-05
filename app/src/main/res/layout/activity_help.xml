@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#00b7ff">
+    android:background="#e74c3c">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tips for Use:"
+        android:text="Tips for Use"
         android:id="@+id/help1"
-        android:layout_centerVertical="true"
+        android:textSize="50dp"
+        android:textColor="#ecf0f1"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Keep the Tango steady"
+        android:text="-Keep the Tango steady"
         android:id="@+id/help2"
+        android:textSize="30dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/help1"/>
+        android:layout_below="@id/help1"
+        android:textColor="#ecf0f1"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Tango will provide feedback when you approach"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/help2"/>
+        android:text="-You will feel a vibration when you approach an object or barrier"
+        android:textSize="30dp"
+        android:textColor="#ecf0f1"
+        android:layout_below="@+id/help2"
+        android:layout_alignStart="@+id/help2" />
 
 </RelativeLayout>

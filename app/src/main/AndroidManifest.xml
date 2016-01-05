@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry">
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
