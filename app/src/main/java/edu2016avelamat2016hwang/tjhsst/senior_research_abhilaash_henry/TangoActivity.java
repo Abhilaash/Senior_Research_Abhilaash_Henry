@@ -12,6 +12,8 @@ import com.google.atap.tangoservice.TangoEvent;
 import com.google.atap.tangoservice.TangoPoseData;
 import com.google.atap.tangoservice.TangoXyzIjData;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -70,7 +72,18 @@ import java.util.ArrayList;
 
                 @Override
                 public void onXyzIjAvailable(TangoXyzIjData xyzIj) {
-                    // We are not using OnPoseAvailable for this app
+                    byte[] buffer = new byte[xyzIj.xyzCount * 3 * 4];
+                    FileInputStream fileStream = new FileInputStream(
+                            xyzIj.xyzParcelFileDescriptor.getFileDescriptor());
+                    try {
+                        fileStream.read(buffer,
+                                xyzIj.xyzParcelFileDescriptorOffset, buffer.length);
+                        fileStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    // Do not process the buffer inside the callback because
+                    // you will not receive any new data while it processes
                 }
 
                 @Override
