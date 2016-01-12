@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/OpenCV/OpenCV.iml" filepath="$PROJECT_DIR$/OpenCV/OpenCV.iml" />
       <module fileurl="file://$PROJECT_DIR$/Senior_Research_Abhilaash_Henry.iml" filepath="$PROJECT_DIR$/Senior_Research_Abhilaash_Henry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TangoUX_Capella_Java/TangoUX_Capella_Java.iml" filepath="$PROJECT_DIR$/TangoUX_Capella_Java/TangoUX_Capella_Java.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
