@@ -18,7 +18,6 @@
         android:text="-Keep the Tango steady"
         android:id="@+id/help2"
         android:textSize="30dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/help1"
         android:textColor="#ecf0f1"/>
     <TextView

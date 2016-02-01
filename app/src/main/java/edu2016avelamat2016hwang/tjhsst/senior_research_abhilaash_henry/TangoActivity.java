@@ -11,6 +11,7 @@ import com.google.atap.tangoservice.TangoCoordinateFramePair;
 import com.google.atap.tangoservice.TangoEvent;
 import com.google.atap.tangoservice.TangoPoseData;
 import com.google.atap.tangoservice.TangoXyzIjData;
+//import com.google.atap.tango.ux.TangoUx;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
         private TangoConfig mConfig;
         private TangoCameraPreview tangoCameraPreview;
         private TangoCameraIntrinsics tangoCameraIntrinsics;
-
+       // private TangoUX mTangoUx;
 
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
