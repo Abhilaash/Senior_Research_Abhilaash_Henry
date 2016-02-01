@@ -3,6 +3,7 @@ package edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import com.google.atap.tango.ux.TangoUx;
 import com.google.atap.tangoservice.Tango;
 import com.google.atap.tangoservice.TangoCameraIntrinsics;
 import com.google.atap.tangoservice.TangoCameraPreview;
@@ -11,7 +12,6 @@ import com.google.atap.tangoservice.TangoCoordinateFramePair;
 import com.google.atap.tangoservice.TangoEvent;
 import com.google.atap.tangoservice.TangoPoseData;
 import com.google.atap.tangoservice.TangoXyzIjData;
-//import com.google.atap.tango.ux.TangoUx;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
         private TangoConfig mConfig;
         private TangoCameraPreview tangoCameraPreview;
         private TangoCameraIntrinsics tangoCameraIntrinsics;
-       // private TangoUX mTangoUx;
+        private TangoUx mTangoUx;
 
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
@@ -34,6 +34,7 @@ import java.util.ArrayList;
 
             mTango = new Tango(this);
             mConfig = new TangoConfig();
+            mTangoUx = new TangoUx(this);
             mConfig = mTango.getConfig(TangoConfig.CONFIG_TYPE_CURRENT);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORCAMERA, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORMODEAUTO, true);
