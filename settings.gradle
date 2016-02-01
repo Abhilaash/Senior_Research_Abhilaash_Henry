@@ -1,1 +1,1 @@
-include ':app', ':TangoUX_Capella_Java'
+include ':app'
