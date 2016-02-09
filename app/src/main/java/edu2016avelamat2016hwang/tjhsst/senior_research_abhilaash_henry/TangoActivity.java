@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
 import com.google.atap.tango.ux.TangoUx;
+import com.google.atap.tango.ux.TangoUxLayout;
 import com.google.atap.tangoservice.Tango;
 import com.google.atap.tangoservice.TangoCameraIntrinsics;
 import com.google.atap.tangoservice.TangoCameraPreview;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
         private TangoCameraPreview tangoCameraPreview;
         private TangoCameraIntrinsics tangoCameraIntrinsics;
         private TangoUx mTangoUx;
-
+        private TangoUxLayout mTangoUxLayout;
         protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_tango);
@@ -35,6 +36,8 @@ import java.util.ArrayList;
             mTango = new Tango(this);
             mConfig = new TangoConfig();
             mTangoUx = new TangoUx(this);
+            mTangoUxLayout = (TangoUxLayout) findViewById(R.id.layout_tango);
+            tangoUxConnect();
             mConfig = mTango.getConfig(TangoConfig.CONFIG_TYPE_CURRENT);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORCAMERA, true);
             mConfig.putBoolean(TangoConfig.KEY_BOOLEAN_COLORMODEAUTO, true);
@@ -47,6 +50,41 @@ import java.util.ArrayList;
 //            tangoCameraPreview = new TangoCameraPreview(this);
 //            tangoCameraIntrinsics = new TangoCameraIntrinsics();
 //            conCamera(tangoCameraIntrinsics.TANGO_CAMERA_DEPTH);
+        }
+
+        private void tangoUxConnect(){
+            mTangoUx.setLayout(mTangoUxLayout);
+            Tango.OnTangoUpdateListener listener = new
+                    Tango.OnTangoUpdateListener() {
+                        @Override
+                        public void onPoseAvailable(final TangoPoseData pose) {
+                            if (mTangoUx != null) {
+                                mTangoUx.updatePoseStatus(pose.statusCode);
+                            }
+                        }
+
+                        @Override
+                        public void onXyzIjAvailable(TangoXyzIjData xyzIj) {
+                            if (mTangoUx != null) {
+                                mTangoUx.updateXyzCount(xyzIj.xyzCount);
+                            }
+                        }
+
+                        @Override
+                        public void onTangoEvent(TangoEvent event) {
+                            if (mTangoUx != null) {
+                                mTangoUx.updateTangoEvent(event);
+                            }
+                        }
+
+                        @Override
+                        public void onFrameAvailable(int cameraId) {
+                            // ...
+                        }
+                    };
+            TangoUx.StartParams params = new TangoUx.StartParams();
+            params.showConnectionScreen = false;
+            mTangoUx.start(params);
         }
 
         private void startCamera(){
