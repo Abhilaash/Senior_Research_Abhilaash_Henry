@@ -24,6 +24,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile (name: 'rajawali-1.0.315-20160221.203539-1', ext: 'aar')
     testCompile 'junit:junit:4.12'
     compile files('libs/TangoSDK_Gemma_Java.jar')
     compile(name:'TangoUX_Gemma_Java', ext:'aar')

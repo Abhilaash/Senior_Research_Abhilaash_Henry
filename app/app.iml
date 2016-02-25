@@ -76,6 +76,7 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars" />
+      <excludeFolder url="file://$MODULE_DIR$/build/intermediates/exploded-aar/rajawali-1.0.315-20160221.203539-1/jars" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/incremental" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/jniLibs" />
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates/manifests" />
@@ -92,6 +93,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="TangoUX_Gemma_Java-" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-23.1.0" level="project" />
+    <orderEntry type="library" exported="" name="rajawali-1.0.315-20160221.203539-1-" level="project" />
     <orderEntry type="library" exported="" name="TangoSDK_Gemma_Java" level="project" />
     <orderEntry type="library" exported="" name="TangoSupport_Gemma_Java-" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.1.0" level="project" />

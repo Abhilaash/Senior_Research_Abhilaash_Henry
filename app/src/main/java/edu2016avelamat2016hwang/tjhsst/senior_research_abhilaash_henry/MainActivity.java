@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
         bStart.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View view){
-                        Intent intent = new Intent(getApplicationContext(), TangoActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), PointCloudActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -43,10 +43,6 @@ public class MainActivity extends ActionBarActivity {
                     }
                 }
         );
-
-    }
-
-    public void makeFullScreen(){
 
     }
 
