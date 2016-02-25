@@ -67,7 +67,6 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     private float mXyIjPreviousTimeStamp;
     private float mCurrentTimeStamp;
     private float mPointCloudFrameDelta;
-    private String mServiceVersion;
     private boolean mIsTangoServiceConnected;
     private TangoPoseData mPose;
 
@@ -139,8 +138,6 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
         mTangoEventTextView = (TextView) findViewById(R.id.tangoevent);
         mPoseStatusTextView = (TextView) findViewById(R.id.status);
         mPointCountTextView = (TextView) findViewById(R.id.pointCount);
-        mTangoServiceVersionTextView = (TextView) findViewById(R.id.version);
-        mApplicationVersionTextView = (TextView) findViewById(R.id.appversion);
         mAverageZTextView = (TextView) findViewById(R.id.averageZ);
         mFrequencyTextView = (TextView) findViewById(R.id.frameDelta);
 
@@ -168,17 +165,6 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
         mGLView.setEGLContextClientVersion(2);
         mGLView.setRenderer(mRenderer);
 
-        PackageInfo packageInfo;
-        try {
-            packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
-            mApplicationVersionTextView.setText(packageInfo.versionName);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        // Display the version of Tango Service
-        mServiceVersion = mConfig.getString("tango_service_library_version");
-        mTangoServiceVersionTextView.setText(mServiceVersion);
         mIsTangoServiceConnected = false;
         startUIThread();
     }
