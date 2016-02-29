@@ -1,11 +1,13 @@
 package edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,7 +71,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     private float mPointCloudFrameDelta;
     private boolean mIsTangoServiceConnected;
     private TangoPoseData mPose;
-
+    private Vibrator vibrator;
     private TangoUx mTangoUx;
     private TangoUxLayout mTangoUxLayout;
 
@@ -129,8 +131,8 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_cloud);
-        setTitle(R.string.app_name);
-
+        setTitle("Henry's Expensive Vibrator that Breaks Easily");
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mPoseTextView = (TextView) findViewById(R.id.pose);
         mQuatTextView = (TextView) findViewById(R.id.quat);
         mPoseCountTextView = (TextView) findViewById(R.id.posecount);
@@ -338,6 +340,10 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                         TangoPoseData pointCloudPose = mTango.getPoseAtTime(mCurrentTimeStamp,
                                 framePairs.get(0));
                         mPointCount = xyzIj.xyzCount;
+                        if(mPointCount > 0)
+                        {
+                            vibrator.vibrate(mPointCount);//1000 milliseconds or 1 second vibration
+                        }
                         if(!mRenderer.isValid()){
                             return;
                         }

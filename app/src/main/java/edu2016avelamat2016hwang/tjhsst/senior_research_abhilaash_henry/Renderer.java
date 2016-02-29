@@ -1,5 +1,8 @@
 package edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry;
 
+/**
+ * From Google Sample Code 2/22/2016.
+ */
 
     import android.opengl.Matrix;
     import android.util.Log;

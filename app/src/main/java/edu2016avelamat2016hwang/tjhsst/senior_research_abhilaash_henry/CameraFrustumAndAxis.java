@@ -8,7 +8,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
 /**
- * Created by Abhilaash on 2/22/2016.
+ * From Google Sample Code on 2/22/2016.
  */
 public class CameraFrustumAndAxis extends Renderable {
 

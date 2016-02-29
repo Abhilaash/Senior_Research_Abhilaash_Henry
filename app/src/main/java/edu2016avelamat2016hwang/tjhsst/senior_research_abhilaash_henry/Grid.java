@@ -1,7 +1,7 @@
 package edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry;
 
 /**
- * Created by Abhilaash on 2/22/2016.
+ * From Google Sample Code 2/22/2016.
  */
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
