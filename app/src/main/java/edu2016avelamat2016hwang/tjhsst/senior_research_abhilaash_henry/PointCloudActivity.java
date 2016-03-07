@@ -74,7 +74,8 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     private Vibrator vibrator;
     private TangoUx mTangoUx;
     private TangoUxLayout mTangoUxLayout;
-
+    private int vibratetime = 0;
+    private float countTime = 0;
     private static final int UPDATE_INTERVAL_MS = 100;
     public static Object poseLock = new Object();
     public static Object depthLock = new Object();
@@ -131,7 +132,6 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_point_cloud);
-        setTitle("Henry's Expensive Vibrator that Breaks Easily");
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mPoseTextView = (TextView) findViewById(R.id.pose);
         mQuatTextView = (TextView) findViewById(R.id.quat);
@@ -339,11 +339,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                     try {
                         TangoPoseData pointCloudPose = mTango.getPoseAtTime(mCurrentTimeStamp,
                                 framePairs.get(0));
-                        mPointCount = xyzIj.xyzCount;
-                        if(mPointCount > 0)
-                        {
-                            vibrator.vibrate(mPointCount);//1000 milliseconds or 1 second vibration
-                        }
+
                         if(!mRenderer.isValid()){
                             return;
                         }
@@ -353,6 +349,8 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                 pointCloudPose.getRotationAsFloats());
                         mRenderer.getPointCloud().setModelMatrix(
                                 mRenderer.getModelMatCalculator().getPointCloudModelMatrixCopy());
+                        mPointCount = xyzIj.xyzCount;
+
                     } catch (TangoErrorException e) {
                         Toast.makeText(getApplicationContext(), R.string.TangoError,
                                 Toast.LENGTH_SHORT).show();
@@ -404,6 +402,13 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                     if (mPose == null) {
                                         return;
                                     }
+                                    if(count % 10 == 0) {
+                                        vibratetime = mPointCount;
+                                        if(mPointCount > 1000){
+                                            vibratetime = 1000;
+                                        }
+                                        vibrator.vibrate(vibratetime);//1000 milliseconds or 1 second vibration
+                                    }
                                     String translationString = "["
                                             + threeDec.format(mPose.translation[0]) + ", "
                                             + threeDec.format(mPose.translation[1]) + ", "
@@ -419,6 +424,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                     mQuatTextView.setText(quaternionString);
                                     mPoseCountTextView.setText(Integer.toString(count));
                                     mDeltaTextView.setText(threeDec.format(mDeltaTime));
+
                                     if (mPose.statusCode == TangoPoseData.POSE_VALID) {
                                         mPoseStatusTextView.setText(R.string.pose_valid);
                                     } else if (mPose.statusCode == TangoPoseData.POSE_INVALID) {
