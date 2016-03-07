@@ -402,7 +402,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                     if (mPose == null) {
                                         return;
                                     }
-                                    if(count % 2 == 0) {
+                                    if(count % 5 == 0) {
                                         vibratetime = mPointCount;
                                         if(mPointCount > 1000){
                                             vibratetime = 1000;
