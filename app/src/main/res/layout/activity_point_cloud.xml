@@ -161,6 +161,19 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="200dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp">
+        <com.google.atap.tangoservice.TangoCameraPreview
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/view" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/first_person_button"
         android:layout_width="100dp"

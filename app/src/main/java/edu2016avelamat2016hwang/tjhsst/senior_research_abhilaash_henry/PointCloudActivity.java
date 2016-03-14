@@ -174,6 +174,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     @Override
     protected void onPause() {
         super.onPause();
+        vibrator.cancel();
         mTangoUx.stop();
 //        try {
             mTango.disconnect();
@@ -406,6 +407,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                         float depth = mRenderer.getPointCloud().getAverageZ();
                                         vibratetime = mPointCount;
                                         if(mPointCount > 1000 && depth < 2){
+                                            vibrator.cancel();
                                             vibratetime = 1000;
                                         }
                                         vibrator.vibrate(vibratetime);//1000 milliseconds or 1 second vibration
@@ -455,4 +457,3 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
         }).start();
     }
 }
-
