@@ -403,8 +403,9 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                         return;
                                     }
                                     if(count % 5 == 0) {
+                                        float depth = mRenderer.getPointCloud().getAverageZ();
                                         vibratetime = mPointCount;
-                                        if(mPointCount > 1000){
+                                        if(mPointCount > 1000 && depth < 2){
                                             vibratetime = 1000;
                                         }
                                         vibrator.vibrate(vibratetime);//1000 milliseconds or 1 second vibration
