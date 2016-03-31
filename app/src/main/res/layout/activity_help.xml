@@ -21,6 +21,7 @@
         android:layout_below="@id/help1"
         android:textColor="#ecf0f1"/>
     <TextView
+        android:id="@+id/instruction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="-You will feel a vibration when you approach an object or barrier"
@@ -28,5 +29,19 @@
         android:textColor="#ecf0f1"
         android:layout_below="@+id/help2"
         android:layout_alignStart="@+id/help2" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Normal Intensity Vibration"
+        android:layout_below="@+id/instruction"
+        android:layout_centerHorizontal="true" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lower Intensity Vibration"
+        android:layout_below="@+id/button1"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
