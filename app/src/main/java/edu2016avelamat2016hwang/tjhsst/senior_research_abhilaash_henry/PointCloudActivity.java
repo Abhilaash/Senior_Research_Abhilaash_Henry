@@ -176,18 +176,15 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
         super.onPause();
         vibrator.cancel();
         mTangoUx.stop();
-//        try {
-            mTango.disconnect();
-            mIsTangoServiceConnected = false;
-//        } catch (TangoErrorException e) {
-//            Toast.makeText(getApplicationContext(), R.string.TangoError, Toast.LENGTH_SHORT).show();
-//        }
+        mTango.disconnect();
+        mIsTangoServiceConnected = false;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         TangoUx.StartParams params = new TangoUx.StartParams();
+        mIsTangoServiceConnected = true;
         mTangoUx.start(params);
         if (!mIsTangoServiceConnected) {
             startActivityForResult(
@@ -234,6 +231,10 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        vibrator.cancel();
+        mTangoUx.stop();
+        mTango.disconnect();
+        mIsTangoServiceConnected = false;
     }
 
     @Override
