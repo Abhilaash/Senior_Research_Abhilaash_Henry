@@ -63,7 +63,7 @@ public class HelpActivity extends ActionBarActivity{
 
 
     }
-
+    //Create pattern method
     public long[] createPattern(float intensity, long duration)
     {
         long[] pattern;
