@@ -77,7 +77,7 @@ public class HelpActivity extends ActionBarActivity{
         }
         return pattern;
     }
-    public long[] genVibratorPattern( float intensity, long duration )
+/*    public long[] genVibratorPattern( float intensity, long duration )
     {
         float dutyCycle = Math.abs( ( intensity * 2.0f ) - 1.0f );//[0,1]
         long hWidth = (long) ( dutyCycle * ( duration - 1 ) ) + 1;
@@ -92,5 +92,5 @@ public class HelpActivity extends ActionBarActivity{
         }
 
         return pattern;
-    }
+    }*/
 }
