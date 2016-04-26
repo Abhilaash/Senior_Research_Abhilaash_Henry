@@ -111,6 +111,11 @@ import android.opengl.Matrix;
             mModelMatrix[14] += -1f * translation[1];
         }
 
+
+        public void combineMatrix(float[] matrix1, float[]matrix2){
+
+        }
+
         public void SetDevice2IMUMatrix(float[] translation, float[] quaternion) {
             mDevice2IMUMatrix = quaternionMatrixOpenGL(quaternion);
             mDevice2IMUMatrix[12] = translation[0];

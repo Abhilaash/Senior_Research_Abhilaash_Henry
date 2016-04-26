@@ -184,7 +184,6 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
     protected void onResume() {
         super.onResume();
         TangoUx.StartParams params = new TangoUx.StartParams();
-        mIsTangoServiceConnected = true;
         mTangoUx.start(params);
         if (!mIsTangoServiceConnected) {
             startActivityForResult(
