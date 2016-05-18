@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "edu2016avelamat2016hwang.tjhsst.senior_research_abhilaash_henry"
@@ -26,12 +26,12 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile (name: 'rajawali-1.0.315-20160221.203539-1', ext: 'aar')
     testCompile 'junit:junit:4.12'
-    compile files('libs/TangoSDK_Kajam_Java.jar')
-    compile(name:'TangoUX_Kajam_Java', ext:'aar')
-    compile (name: 'TangoSupport_Kajam_Java', ext: 'aar')
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:support-v4:23.1.0'
-    compile 'com.android.support:design:23.1.0'
+    compile files('libs/TangoSDK_Mira_Java.jar')
+    compile(name:'TangoUX_Mira_Java', ext:'aar')
+    compile (name: 'TangoSupport_Mira_Java', ext: 'aar')
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:design:23.4.0'
 
     compile (name:'rajawali-1.0.315-20160221.203539-1', ext:'aar')
 
