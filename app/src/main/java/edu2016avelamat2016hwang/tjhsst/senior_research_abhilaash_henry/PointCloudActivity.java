@@ -286,7 +286,6 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
         mRenderer.getModelMatCalculator().SetColorCamera2IMUMatrix(
                 color2IMUPose.getTranslationAsFloats(), color2IMUPose.getRotationAsFloats());
     }
-
     private void setTangoListeners() {
         // Configure the Tango coordinate frame pair
         final ArrayList<TangoCoordinateFramePair> framePairs = new ArrayList<TangoCoordinateFramePair>();
@@ -316,7 +315,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                     }
                     count++;
                     mPreviousPoseStatus = pose.statusCode;
-                    if(!mRenderer.isValid()){
+                    if (!mRenderer.isValid()) {
                         return;
                     }
                     mRenderer.getModelMatCalculator().updateModelMatrix(
@@ -326,7 +325,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
 
             @Override
             public void onXyzIjAvailable(final TangoXyzIjData xyzIj) {
-                if(mTangoUx!=null){
+                if (mTangoUx != null) {
                     mTangoUx.updateXyzCount(xyzIj.xyzCount);
                 }
                 // Make sure to have atomic access to TangoXyzIjData so that
@@ -341,7 +340,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                         TangoPoseData pointCloudPose = mTango.getPoseAtTime(mCurrentTimeStamp,
                                 framePairs.get(0));
 
-                        if(!mRenderer.isValid()){
+                        if (!mRenderer.isValid()) {
                             return;
                         }
                         mRenderer.getPointCloud().UpdatePoints(xyzIj.xyz);
@@ -364,7 +363,7 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
 
             @Override
             public void onTangoEvent(final TangoEvent event) {
-                if(mTangoUx!=null){
+                if (mTangoUx != null) {
 //                    mTangoUx.onTangoEvent(event);
                 }
                 runOnUiThread(new Runnable() {
@@ -381,7 +380,26 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
             }
         });
     }
+    /**http://stackoverflow.com/questions/20808479/algorithm-for-generating-vibration-patterns-ranging-in-intensity-in-android/20821575#20821575
+    *Vary vibration intensity; adapted from StackOverflow question. Intensity is from [0, 1.0]
+    */
+    public long[] genVibratorPattern( float intensity, long duration )
+    {
+        duration = duration/2;
+        float dutyCycle = Math.abs( ( intensity * 2.0f ) - 1.0f );//[0,1]
+        long hWidth = (long) ( dutyCycle * ( duration - 1 ) ) + 1;
+        long lWidth = (dutyCycle == 1.0f) ? 0 : 1;
 
+        int pulseCount = (int) ( 2.0f * ( (float) duration / (float) ( hWidth + lWidth ) ) );
+        long[] pattern = new long[ pulseCount ];
+
+        for( int i = 0; i < pulseCount; i++ )
+        {
+            pattern[i] = intensity < 0.5f ? ( i % 2 == 0 ? hWidth : lWidth ) : ( i % 2 == 0 ? lWidth : hWidth );
+        }
+
+        return pattern;
+    }
     /**
      * Create a separate thread to update Log information on UI at the specified interval of
      * UPDATE_INTERVAL_MS. This function also makes sure to have access to the mPose atomically.
@@ -403,15 +421,20 @@ public class PointCloudActivity extends Activity implements View.OnClickListener
                                     if (mPose == null) {
                                         return;
                                     }
-                                    if(count % 5 == 0) {
-                                        float depth = mRenderer.getPointCloud().getAverageZ();
-                                        vibratetime = mPointCount;
-                                        if(mPointCount > 1000 && depth < 2){
-                                            vibrator.cancel();
-                                            vibratetime = 1000;
-                                        }
-                                        vibrator.vibrate(vibratetime);//1000 milliseconds or 1 second vibration
+                                   vibrator.cancel();
+                                    float depth = mRenderer.getPointCloud().getAverageZ();
+                                    vibratetime = mPointCount;
+                                    float vibrateIntensity = 0;
+                                    vibrator.cancel();
+                                    if(depth < 4){
+                                        vibrator.cancel();
+                                        //vibratetime = 1000;
+                                        vibrateIntensity = -1*(depth-2)/2;
+                                        long[] pattern = genVibratorPattern((float) vibrateIntensity, 3000);
+                                        //vibrator.vibrate(vibratetime);//1000 milliseconds or 1 second vibration
+                                        vibrator.vibrate(pattern, -1);
                                     }
+
                                     String translationString = "["
                                             + threeDec.format(mPose.translation[0]) + ", "
                                             + threeDec.format(mPose.translation[1]) + ", "
